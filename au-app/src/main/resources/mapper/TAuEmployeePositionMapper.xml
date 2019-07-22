@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vosung.authapp.employee.mapper.TAuEmployeePositionMapper">
+  <resultMap id="BaseResultMap" type="com.vosung.auapi.client.entity.TAuEmployeePosition">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="employee_id" jdbcType="INTEGER" property="employeeId" />
+    <result column="work_org_id" jdbcType="INTEGER" property="workOrgId" />
+    <result column="belong_dept_id" jdbcType="INTEGER" property="belongDeptId" />
+    <result column="director_position_id" jdbcType="INTEGER" property="directorPositionId" />
+    <result column="director_position_start_date" jdbcType="DATE" property="directorPositionStartDate" />
+    <result column="is_main_position" jdbcType="CHAR" property="isMainPosition" />
+    <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+    <result column="data_state" jdbcType="VARCHAR" property="dataState" />
+    <result column="prohibit_state" jdbcType="CHAR" property="prohibitState" />
+    <result column="prohibit_user" jdbcType="INTEGER" property="prohibitUser" />
+    <result column="prohibit_time" jdbcType="TIMESTAMP" property="prohibitTime" />
+    <result column="review_user" jdbcType="INTEGER" property="reviewUser" />
+    <result column="review_time" jdbcType="TIMESTAMP" property="reviewTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, employee_id, work_org_id, belong_dept_id, director_position_id, director_position_start_date, 
+    is_main_position, is_delete, data_state, prohibit_state, prohibit_user, prohibit_time, 
+    review_user, review_time, create_time, create_user, update_time, update_user
+  </sql>
+  <select id="selectByExample" parameterType="com.vosung.auapi.client.entity.TAuEmployeePositionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AU_EMPLOYEE_POSITION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_AU_EMPLOYEE_POSITION
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_AU_EMPLOYEE_POSITION
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vosung.auapi.client.entity.TAuEmployeePositionExample">
+    delete from T_AU_EMPLOYEE_POSITION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vosung.auapi.client.entity.TAuEmployeePosition">
+    insert into T_AU_EMPLOYEE_POSITION (id, employee_id, work_org_id, 
+      belong_dept_id, director_position_id, director_position_start_date, 
+      is_main_position, is_delete, data_state, 
+      prohibit_state, prohibit_user, prohibit_time, 
+      review_user, review_time, create_time, 
+      create_user, update_time, update_user
+      )
+    values (#{id,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, #{workOrgId,jdbcType=INTEGER}, 
+      #{belongDeptId,jdbcType=INTEGER}, #{directorPositionId,jdbcType=INTEGER}, #{directorPositionStartDate,jdbcType=DATE}, 
+      #{isMainPosition,jdbcType=CHAR}, #{isDelete,jdbcType=CHAR}, #{dataState,jdbcType=VARCHAR}, 
+      #{prohibitState,jdbcType=CHAR}, #{prohibitUser,jdbcType=INTEGER}, #{prohibitTime,jdbcType=TIMESTAMP}, 
+      #{reviewUser,jdbcType=INTEGER}, #{reviewTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vosung.auapi.client.entity.TAuEmployeePosition">
+    insert into T_AU_EMPLOYEE_POSITION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="workOrgId != null">
+        work_org_id,
+      </if>
+      <if test="belongDeptId != null">
+        belong_dept_id,
+      </if>
+      <if test="directorPositionId != null">
+        director_position_id,
+      </if>
+      <if test="directorPositionStartDate != null">
+        director_position_start_date,
+      </if>
+      <if test="isMainPosition != null">
+        is_main_position,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="dataState != null">
+        data_state,
+      </if>
+      <if test="prohibitState != null">
+        prohibit_state,
+      </if>
+      <if test="prohibitUser != null">
+        prohibit_user,
+      </if>
+      <if test="prohibitTime != null">
+        prohibit_time,
+      </if>
+      <if test="reviewUser != null">
+        review_user,
+      </if>
+      <if test="reviewTime != null">
+        review_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="workOrgId != null">
+        #{workOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="belongDeptId != null">
+        #{belongDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="directorPositionId != null">
+        #{directorPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="directorPositionStartDate != null">
+        #{directorPositionStartDate,jdbcType=DATE},
+      </if>
+      <if test="isMainPosition != null">
+        #{isMainPosition,jdbcType=CHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="dataState != null">
+        #{dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null">
+        #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null">
+        #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null">
+        #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null">
+        #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null">
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vosung.auapi.client.entity.TAuEmployeePositionExample" resultType="java.lang.Integer">
+    select count(*) from T_AU_EMPLOYEE_POSITION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_AU_EMPLOYEE_POSITION
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeId != null">
+        employee_id = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.workOrgId != null">
+        work_org_id = #{record.workOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.belongDeptId != null">
+        belong_dept_id = #{record.belongDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.directorPositionId != null">
+        director_position_id = #{record.directorPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.directorPositionStartDate != null">
+        director_position_start_date = #{record.directorPositionStartDate,jdbcType=DATE},
+      </if>
+      <if test="record.isMainPosition != null">
+        is_main_position = #{record.isMainPosition,jdbcType=CHAR},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.dataState != null">
+        data_state = #{record.dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prohibitState != null">
+        prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="record.prohibitUser != null">
+        prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.prohibitTime != null">
+        prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reviewUser != null">
+        review_user = #{record.reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.reviewTime != null">
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_AU_EMPLOYEE_POSITION
+    set id = #{record.id,jdbcType=INTEGER},
+      employee_id = #{record.employeeId,jdbcType=INTEGER},
+      work_org_id = #{record.workOrgId,jdbcType=INTEGER},
+      belong_dept_id = #{record.belongDeptId,jdbcType=INTEGER},
+      director_position_id = #{record.directorPositionId,jdbcType=INTEGER},
+      director_position_start_date = #{record.directorPositionStartDate,jdbcType=DATE},
+      is_main_position = #{record.isMainPosition,jdbcType=CHAR},
+      is_delete = #{record.isDelete,jdbcType=CHAR},
+      data_state = #{record.dataState,jdbcType=VARCHAR},
+      prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      review_user = #{record.reviewUser,jdbcType=INTEGER},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vosung.auapi.client.entity.TAuEmployeePosition">
+    update T_AU_EMPLOYEE_POSITION
+    <set>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="workOrgId != null">
+        work_org_id = #{workOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="belongDeptId != null">
+        belong_dept_id = #{belongDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="directorPositionId != null">
+        director_position_id = #{directorPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="directorPositionStartDate != null">
+        director_position_start_date = #{directorPositionStartDate,jdbcType=DATE},
+      </if>
+      <if test="isMainPosition != null">
+        is_main_position = #{isMainPosition,jdbcType=CHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="dataState != null">
+        data_state = #{dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null">
+        prohibit_state = #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null">
+        prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null">
+        prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null">
+        review_user = #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null">
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vosung.auapi.client.entity.TAuEmployeePosition">
+    update T_AU_EMPLOYEE_POSITION
+    set employee_id = #{employeeId,jdbcType=INTEGER},
+      work_org_id = #{workOrgId,jdbcType=INTEGER},
+      belong_dept_id = #{belongDeptId,jdbcType=INTEGER},
+      director_position_id = #{directorPositionId,jdbcType=INTEGER},
+      director_position_start_date = #{directorPositionStartDate,jdbcType=DATE},
+      is_main_position = #{isMainPosition,jdbcType=CHAR},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      data_state = #{dataState,jdbcType=VARCHAR},
+      prohibit_state = #{prohibitState,jdbcType=CHAR},
+      prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      review_user = #{reviewUser,jdbcType=INTEGER},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <resultMap id="EmployeePostMap" type="com.vosung.auapi.client.dto.responsedto.post.EmployeePostDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="employee_id" jdbcType="INTEGER" property="employeeId" />
+    <result column="work_org_id" jdbcType="INTEGER" property="workOrgId" />
+    <result column="belong_dept_id" jdbcType="INTEGER" property="belongDeptId" />
+    <result column="director_position_id" jdbcType="INTEGER" property="directorPositionId" />
+    <result column="director_position_start_date" jdbcType="DATE" property="directorPositionStartDate" />
+    <result column="is_main_position" jdbcType="CHAR" property="isMainPosition" />
+    <result column="data_state" jdbcType="VARCHAR" property="dataState" />
+    <result column="prohibit_state" jdbcType="CHAR" property="prohibitState" />
+    <result column="employee_name" property="employeeName" jdbcType="VARCHAR" />
+    <result column="employee_code" property="employeeCode" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="is_hr_employee" property="isHrEmployee" jdbcType="CHAR" />
+    <result column="from_s_hr" property="fromSHr" jdbcType="CHAR" />
+    <result column="contact_address" property="contactAddress" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="getEmployeePostByPostId" parameterType="java.lang.Integer" resultMap="EmployeePostMap">
+    SELECT
+      p.id,
+      p.employee_id,
+      p.work_org_id,
+      p.belong_dept_id,
+      p.director_position_id,
+      p.director_position_start_date,
+      p.is_main_position,
+      p.data_state,
+      p.prohibit_state,
+      e.employee_name,
+      e.employee_code,
+      e.phone,
+      e.mobile,
+      e.email,
+      e.is_hr_employee,
+      e.from_s_hr,
+      e.contact_address,
+      e.image
+    from T_AU_EMPLOYEE_POSITION p left join T_AU_EMPLOYEE e on p.employee_id = e.id
+    where p.id = #{postId} and e.is_delete = 'N' and p.is_delete = 'N';
+  </select>
+
+  <select id="getPostList" parameterType="com.vosung.auapi.client.dto.requestdto.post.PostListRequest" resultType="com.vosung.auapi.client.dto.responsedto.post.PostListDto">
+    select
+        ep.id,ep.work_org_id workOrgId,ep.data_state dataState,ep.prohibit_state prohibitState,ep.belong_dept_id belongDeptId,ep.employee_id employeeId,
+        ep.director_position_id directorPositionId,p.position_name directorPositionName,o.org_name createOrgName,o.org_name useOrgName,
+        e.employee_name employeeName,e.employee_code employeeCode,d.dept_name belongDeptName,e.is_hr_employee isHrEmployee,e.from_s_hr fromSHr
+    from T_AU_EMPLOYEE_POSITION ep
+    left join T_AU_EMPLOYEE e on e.id = ep.employee_id
+    left join T_AU_POSITION p on ep.director_position_id = p.id
+    left join T_AU_ORGANIZATION o on ep.work_org_id = o.id
+    left join T_AU_DEPARTEMNT d on p.belong_dept_id = d.id
+    where ep.is_delete = 'N'
+    <if test="directorPositionId != null">
+      and ep.director_position_id = #{directorPositionId}
+    </if>
+  </select>
+
+  <select id="getPostListByPositionId" parameterType="java.lang.Integer" resultType="com.vosung.auapi.client.dto.responsedto.post.PostListDto">
+    select
+    ep.id,ep.work_org_id workOrgId,ep.data_state dataState,ep.prohibit_state prohibitState,ep.belong_dept_id belongDeptId,ep.employee_id employeeId,
+    ep.director_position_id directorPositionId,p.position_name directorPositionName,o.org_name createOrgName,o.org_name useOrgName,
+    e.employee_name employeeName,e.employee_code employeeCode,d.dept_name belongDeptName,e.is_hr_employee isHrEmployee,e.from_s_hr fromSHr
+    from T_AU_EMPLOYEE_POSITION ep
+    left join T_AU_EMPLOYEE e on e.id = ep.employee_id
+    left join T_AU_POSITION p on ep.director_position_id = p.id
+    left join T_AU_ORGANIZATION o on ep.work_org_id = o.id
+    left join T_AU_DEPARTEMNT d on p.belong_dept_id = d.id
+    where ep.is_delete = 'N' and p.id=#{positionId};
+  </select>
+</mapper>

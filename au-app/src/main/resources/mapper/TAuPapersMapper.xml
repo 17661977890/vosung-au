@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vosung.authapp.employee.mapper.TAuPapersMapper" >
+  <resultMap id="BaseResultMap" type="com.vosung.auapi.client.entity.TAuPapers" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="papers_type" property="papersType" jdbcType="VARCHAR" />
+    <result column="papers_no" property="papersNo" jdbcType="VARCHAR" />
+    <result column="is_main_papers" property="isMainPapers" jdbcType="CHAR" />
+    <result column="is_effect" property="isEffect" jdbcType="CHAR" />
+    <result column="effective_date" property="effectiveDate" jdbcType="DATE" />
+    <result column="expiry_date" property="expiryDate" jdbcType="DATE" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, employee_id, country, papers_type, papers_no, is_main_papers, is_effect, effective_date, 
+    expiry_date, summary
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vosung.auapi.client.entity.TAuPapersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AU_PAPERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AU_PAPERS
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_AU_PAPERS
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vosung.auapi.client.entity.TAuPapersExample" >
+    delete from T_AU_PAPERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vosung.auapi.client.entity.TAuPapers" >
+    insert into T_AU_PAPERS (id, employee_id, country, 
+      papers_type, papers_no, is_main_papers, 
+      is_effect, effective_date, expiry_date, 
+      summary)
+    values (#{id,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, 
+      #{papersType,jdbcType=VARCHAR}, #{papersNo,jdbcType=VARCHAR}, #{isMainPapers,jdbcType=CHAR}, 
+      #{isEffect,jdbcType=CHAR}, #{effectiveDate,jdbcType=DATE}, #{expiryDate,jdbcType=DATE}, 
+      #{summary,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vosung.auapi.client.entity.TAuPapers" >
+    insert into T_AU_PAPERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="papersType != null" >
+        papers_type,
+      </if>
+      <if test="papersNo != null" >
+        papers_no,
+      </if>
+      <if test="isMainPapers != null" >
+        is_main_papers,
+      </if>
+      <if test="isEffect != null" >
+        is_effect,
+      </if>
+      <if test="effectiveDate != null" >
+        effective_date,
+      </if>
+      <if test="expiryDate != null" >
+        expiry_date,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="papersType != null" >
+        #{papersType,jdbcType=VARCHAR},
+      </if>
+      <if test="papersNo != null" >
+        #{papersNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMainPapers != null" >
+        #{isMainPapers,jdbcType=CHAR},
+      </if>
+      <if test="isEffect != null" >
+        #{isEffect,jdbcType=CHAR},
+      </if>
+      <if test="effectiveDate != null" >
+        #{effectiveDate,jdbcType=DATE},
+      </if>
+      <if test="expiryDate != null" >
+        #{expiryDate,jdbcType=DATE},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vosung.auapi.client.entity.TAuPapersExample" resultType="java.lang.Integer" >
+    select count(*) from T_AU_PAPERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AU_PAPERS
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeId != null" >
+        employee_id = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.papersType != null" >
+        papers_type = #{record.papersType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.papersNo != null" >
+        papers_no = #{record.papersNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isMainPapers != null" >
+        is_main_papers = #{record.isMainPapers,jdbcType=CHAR},
+      </if>
+      <if test="record.isEffect != null" >
+        is_effect = #{record.isEffect,jdbcType=CHAR},
+      </if>
+      <if test="record.effectiveDate != null" >
+        effective_date = #{record.effectiveDate,jdbcType=DATE},
+      </if>
+      <if test="record.expiryDate != null" >
+        expiry_date = #{record.expiryDate,jdbcType=DATE},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AU_PAPERS
+    set id = #{record.id,jdbcType=INTEGER},
+      employee_id = #{record.employeeId,jdbcType=INTEGER},
+      country = #{record.country,jdbcType=VARCHAR},
+      papers_type = #{record.papersType,jdbcType=VARCHAR},
+      papers_no = #{record.papersNo,jdbcType=VARCHAR},
+      is_main_papers = #{record.isMainPapers,jdbcType=CHAR},
+      is_effect = #{record.isEffect,jdbcType=CHAR},
+      effective_date = #{record.effectiveDate,jdbcType=DATE},
+      expiry_date = #{record.expiryDate,jdbcType=DATE},
+      summary = #{record.summary,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vosung.auapi.client.entity.TAuPapers" >
+    update T_AU_PAPERS
+    <set >
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="papersType != null" >
+        papers_type = #{papersType,jdbcType=VARCHAR},
+      </if>
+      <if test="papersNo != null" >
+        papers_no = #{papersNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMainPapers != null" >
+        is_main_papers = #{isMainPapers,jdbcType=CHAR},
+      </if>
+      <if test="isEffect != null" >
+        is_effect = #{isEffect,jdbcType=CHAR},
+      </if>
+      <if test="effectiveDate != null" >
+        effective_date = #{effectiveDate,jdbcType=DATE},
+      </if>
+      <if test="expiryDate != null" >
+        expiry_date = #{expiryDate,jdbcType=DATE},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vosung.auapi.client.entity.TAuPapers" >
+    update T_AU_PAPERS
+    set employee_id = #{employeeId,jdbcType=INTEGER},
+      country = #{country,jdbcType=VARCHAR},
+      papers_type = #{papersType,jdbcType=VARCHAR},
+      papers_no = #{papersNo,jdbcType=VARCHAR},
+      is_main_papers = #{isMainPapers,jdbcType=CHAR},
+      is_effect = #{isEffect,jdbcType=CHAR},
+      effective_date = #{effectiveDate,jdbcType=DATE},
+      expiry_date = #{expiryDate,jdbcType=DATE},
+      summary = #{summary,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

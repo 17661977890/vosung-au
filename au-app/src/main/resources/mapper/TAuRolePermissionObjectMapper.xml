@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vosung.authapp.role.mapper.TAuRolePermissionObjectMapper" >
+  <resultMap id="BaseResultMap" type="com.vosung.auapi.client.entity.TAuRolePermissionObject" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="business_domain_id" property="businessDomainId" jdbcType="INTEGER" />
+    <result column="subsystem_id" property="subsystemId" jdbcType="INTEGER" />
+    <result column="business_object_id" property="businessObjectId" jdbcType="INTEGER" />
+    <result column="permission_object_id" property="permissionObjectId" jdbcType="INTEGER" />
+    <result column="permission_item_id" property="permissionItemId" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="permission_status" property="permissionStatus" jdbcType="CHAR" />
+    <result column="data_rule_id" property="dataRuleId" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, role_id, business_domain_id, subsystem_id, business_object_id, permission_object_id, 
+    permission_item_id, url, permission_status, data_rule_id, is_delete, create_time, 
+    create_user, update_time, update_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vosung.auapi.client.entity.TAuRolePermissionObjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AU_ROLE_PERMISSION_OBJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AU_ROLE_PERMISSION_OBJECT
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_AU_ROLE_PERMISSION_OBJECT
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vosung.auapi.client.entity.TAuRolePermissionObjectExample" >
+    delete from T_AU_ROLE_PERMISSION_OBJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vosung.auapi.client.entity.TAuRolePermissionObject" >
+    insert into T_AU_ROLE_PERMISSION_OBJECT (id, role_id, business_domain_id, 
+      subsystem_id, business_object_id, permission_object_id, 
+      permission_item_id, url, permission_status, 
+      data_rule_id, is_delete, create_time, 
+      create_user, update_time, update_user
+      )
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{businessDomainId,jdbcType=INTEGER}, 
+      #{subsystemId,jdbcType=INTEGER}, #{businessObjectId,jdbcType=INTEGER}, #{permissionObjectId,jdbcType=INTEGER}, 
+      #{permissionItemId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{permissionStatus,jdbcType=CHAR}, 
+      #{dataRuleId,jdbcType=INTEGER}, #{isDelete,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vosung.auapi.client.entity.TAuRolePermissionObject" >
+    insert into T_AU_ROLE_PERMISSION_OBJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="businessDomainId != null" >
+        business_domain_id,
+      </if>
+      <if test="subsystemId != null" >
+        subsystem_id,
+      </if>
+      <if test="businessObjectId != null" >
+        business_object_id,
+      </if>
+      <if test="permissionObjectId != null" >
+        permission_object_id,
+      </if>
+      <if test="permissionItemId != null" >
+        permission_item_id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="permissionStatus != null" >
+        permission_status,
+      </if>
+      <if test="dataRuleId != null" >
+        data_rule_id,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="businessDomainId != null" >
+        #{businessDomainId,jdbcType=INTEGER},
+      </if>
+      <if test="subsystemId != null" >
+        #{subsystemId,jdbcType=INTEGER},
+      </if>
+      <if test="businessObjectId != null" >
+        #{businessObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionObjectId != null" >
+        #{permissionObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionItemId != null" >
+        #{permissionItemId,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionStatus != null" >
+        #{permissionStatus,jdbcType=CHAR},
+      </if>
+      <if test="dataRuleId != null" >
+        #{dataRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vosung.auapi.client.entity.TAuRolePermissionObjectExample" resultType="java.lang.Integer" >
+    select count(*) from T_AU_ROLE_PERMISSION_OBJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AU_ROLE_PERMISSION_OBJECT
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessDomainId != null" >
+        business_domain_id = #{record.businessDomainId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subsystemId != null" >
+        subsystem_id = #{record.subsystemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessObjectId != null" >
+        business_object_id = #{record.businessObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.permissionObjectId != null" >
+        permission_object_id = #{record.permissionObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.permissionItemId != null" >
+        permission_item_id = #{record.permissionItemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permissionStatus != null" >
+        permission_status = #{record.permissionStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.dataRuleId != null" >
+        data_rule_id = #{record.dataRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AU_ROLE_PERMISSION_OBJECT
+    set id = #{record.id,jdbcType=INTEGER},
+      role_id = #{record.roleId,jdbcType=INTEGER},
+      business_domain_id = #{record.businessDomainId,jdbcType=INTEGER},
+      subsystem_id = #{record.subsystemId,jdbcType=INTEGER},
+      business_object_id = #{record.businessObjectId,jdbcType=INTEGER},
+      permission_object_id = #{record.permissionObjectId,jdbcType=INTEGER},
+      permission_item_id = #{record.permissionItemId,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      permission_status = #{record.permissionStatus,jdbcType=CHAR},
+      data_rule_id = #{record.dataRuleId,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vosung.auapi.client.entity.TAuRolePermissionObject" >
+    update T_AU_ROLE_PERMISSION_OBJECT
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="businessDomainId != null" >
+        business_domain_id = #{businessDomainId,jdbcType=INTEGER},
+      </if>
+      <if test="subsystemId != null" >
+        subsystem_id = #{subsystemId,jdbcType=INTEGER},
+      </if>
+      <if test="businessObjectId != null" >
+        business_object_id = #{businessObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionObjectId != null" >
+        permission_object_id = #{permissionObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionItemId != null" >
+        permission_item_id = #{permissionItemId,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionStatus != null" >
+        permission_status = #{permissionStatus,jdbcType=CHAR},
+      </if>
+      <if test="dataRuleId != null" >
+        data_rule_id = #{dataRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vosung.auapi.client.entity.TAuRolePermissionObject" >
+    update T_AU_ROLE_PERMISSION_OBJECT
+    set role_id = #{roleId,jdbcType=INTEGER},
+      business_domain_id = #{businessDomainId,jdbcType=INTEGER},
+      subsystem_id = #{subsystemId,jdbcType=INTEGER},
+      business_object_id = #{businessObjectId,jdbcType=INTEGER},
+      permission_object_id = #{permissionObjectId,jdbcType=INTEGER},
+      permission_item_id = #{permissionItemId,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      permission_status = #{permissionStatus,jdbcType=CHAR},
+      data_rule_id = #{dataRuleId,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getUserPermissionDtoList" parameterType="java.util.List" resultType="com.vosung.auapi.client.dto.responsedto.rolepermission.UserPermissionDto">
+    select  rpo.id,rpo.business_domain_id businessDomainId,rpo.subsystem_id subsystemId,rpo.business_object_id businessObjectId,
+    rpo.permission_item_id permissionItemId,rpo.role_id roleId,r.role_name roleName,
+    pi.permission_name permissionName,rpo.permission_status permissionStatus
+    from T_AU_ROLE_PERMISSION_OBJECT rpo
+    left join T_AU_ROLE r on rpo.role_id =r.id
+    left join T_AU_PERMISSION_ITEM pi on rpo.permission_item_id = pi.id
+    where rpo.is_delete = 'N' and rpo.role_id in
+      <foreach collection="list" index="index" item="roleId" separator="," close=")" open="(">
+        #{roleId}
+      </foreach>
+  </select>
+
+
+  <select id="getRoleBuObjListDtoList" parameterType="java.lang.Integer" resultType="com.vosung.auapi.client.dto.responsedto.rolepermission.RoleBuObjListDto">
+    select  rpo.id,rpo.business_domain_id businessDomainId,rpo.subsystem_id subsystemId,rpo.business_object_id businessObjectId,
+    rpo.permission_item_id permissionItemId,rpo.role_id roleId,r.role_name roleName,
+    pi.permission_name permissionName,rpo.permission_status permissionStatus
+    from T_AU_ROLE_PERMISSION_OBJECT rpo
+    left join T_AU_ROLE r on rpo.role_id =r.id
+    left join T_AU_PERMISSION_ITEM pi on rpo.permission_item_id = pi.id
+    where rpo.is_delete = 'N' and rpo.role_id = #{roleId};
+  </select>
+
+  <select id="getBuObjPermissionByRoleAndBo" resultType="com.vosung.auapi.client.dto.responsedto.rolepermission.BuObjPermissionItemDto">
+    select rpo.permission_item_id permissionItemId,rpo.permission_status permissionStatus,pt.permission_name permissionItemName,pt.permission_group_code permissionGroupCode
+    from T_AU_ROLE_PERMISSION_OBJECT rpo
+    left join T_AU_PERMISSION_ITEM pt on rpo.permission_item_id = pt.id
+    where rpo.role_id = #{roleId}
+    and rpo.business_object_id = #{businessObjectId}
+    order by pt.permission_group_code;
+  </select>
+</mapper>

@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vosung.authapp.resource.mapper.TAuMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.vosung.auapi.client.entity.TAuMenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="menu_code" property="menuCode" jdbcType="VARCHAR" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="menu_path" property="menuPath" jdbcType="VARCHAR" />
+    <result column="menu_component" property="menuComponent" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="data_state" property="dataState" jdbcType="VARCHAR" />
+    <result column="prohibit_state" property="prohibitState" jdbcType="CHAR" />
+    <result column="prohibit_user" property="prohibitUser" jdbcType="INTEGER" />
+    <result column="prohibit_time" property="prohibitTime" jdbcType="TIMESTAMP" />
+    <result column="review_user" property="reviewUser" jdbcType="INTEGER" />
+    <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+    <result column="is_menu_and_button" property="isMenuAndButton" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, menu_code, menu_name, menu_icon, parent_id, sort, level, menu_path, menu_component, 
+    summary, data_state, prohibit_state, prohibit_user, prohibit_time, review_user, review_time, 
+    is_delete, create_time, create_user, update_time, update_user, is_menu_and_button
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vosung.auapi.client.entity.TAuMenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AU_MENU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AU_MENU
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_AU_MENU
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vosung.auapi.client.entity.TAuMenuExample" >
+    delete from T_AU_MENU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vosung.auapi.client.entity.TAuMenu" >
+    insert into T_AU_MENU (id, menu_code, menu_name, 
+      menu_icon, parent_id, sort, 
+      level, menu_path, menu_component, 
+      summary, data_state, prohibit_state, 
+      prohibit_user, prohibit_time, review_user, 
+      review_time, is_delete, create_time, 
+      create_user, update_time, update_user, 
+      is_menu_and_button)
+    values (#{id,jdbcType=INTEGER}, #{menuCode,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuIcon,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{menuPath,jdbcType=VARCHAR}, #{menuComponent,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{dataState,jdbcType=VARCHAR}, #{prohibitState,jdbcType=CHAR}, 
+      #{prohibitUser,jdbcType=INTEGER}, #{prohibitTime,jdbcType=TIMESTAMP}, #{reviewUser,jdbcType=INTEGER}, 
+      #{reviewTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, 
+      #{isMenuAndButton,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vosung.auapi.client.entity.TAuMenu" >
+    insert into T_AU_MENU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="menuCode != null" >
+        menu_code,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuIcon != null" >
+        menu_icon,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="menuPath != null" >
+        menu_path,
+      </if>
+      <if test="menuComponent != null" >
+        menu_component,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="dataState != null" >
+        data_state,
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state,
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user,
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time,
+      </if>
+      <if test="reviewUser != null" >
+        review_user,
+      </if>
+      <if test="reviewTime != null" >
+        review_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="isMenuAndButton != null" >
+        is_menu_and_button,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="menuCode != null" >
+        #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="menuPath != null" >
+        #{menuPath,jdbcType=VARCHAR},
+      </if>
+      <if test="menuComponent != null" >
+        #{menuComponent,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="dataState != null" >
+        #{dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null" >
+        #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null" >
+        #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null" >
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="isMenuAndButton != null" >
+        #{isMenuAndButton,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vosung.auapi.client.entity.TAuMenuExample" resultType="java.lang.Integer" >
+    select count(*) from T_AU_MENU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AU_MENU
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuCode != null" >
+        menu_code = #{record.menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuName != null" >
+        menu_name = #{record.menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuIcon != null" >
+        menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuPath != null" >
+        menu_path = #{record.menuPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuComponent != null" >
+        menu_component = #{record.menuComponent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataState != null" >
+        data_state = #{record.dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prohibitState != null" >
+        prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="record.prohibitUser != null" >
+        prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.prohibitTime != null" >
+        prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reviewUser != null" >
+        review_user = #{record.reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.reviewTime != null" >
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.isMenuAndButton != null" >
+        is_menu_and_button = #{record.isMenuAndButton,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AU_MENU
+    set id = #{record.id,jdbcType=INTEGER},
+      menu_code = #{record.menuCode,jdbcType=VARCHAR},
+      menu_name = #{record.menuName,jdbcType=VARCHAR},
+      menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
+      menu_path = #{record.menuPath,jdbcType=VARCHAR},
+      menu_component = #{record.menuComponent,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      data_state = #{record.dataState,jdbcType=VARCHAR},
+      prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      review_user = #{record.reviewUser,jdbcType=INTEGER},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      is_delete = #{record.isDelete,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      is_menu_and_button = #{record.isMenuAndButton,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vosung.auapi.client.entity.TAuMenu" >
+    update T_AU_MENU
+    <set >
+      <if test="menuCode != null" >
+        menu_code = #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="menuPath != null" >
+        menu_path = #{menuPath,jdbcType=VARCHAR},
+      </if>
+      <if test="menuComponent != null" >
+        menu_component = #{menuComponent,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="dataState != null" >
+        data_state = #{dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state = #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null" >
+        review_user = #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null" >
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="isMenuAndButton != null" >
+        is_menu_and_button = #{isMenuAndButton,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vosung.auapi.client.entity.TAuMenu" >
+    update T_AU_MENU
+    set menu_code = #{menuCode,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      menu_path = #{menuPath,jdbcType=VARCHAR},
+      menu_component = #{menuComponent,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      data_state = #{dataState,jdbcType=VARCHAR},
+      prohibit_state = #{prohibitState,jdbcType=CHAR},
+      prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      review_user = #{reviewUser,jdbcType=INTEGER},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      is_menu_and_button = #{isMenuAndButton,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

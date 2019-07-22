@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vosung.authapp.employee.mapper.TAuEmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.vosung.auapi.client.entity.TAuEmployee" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="employee_name" property="employeeName" jdbcType="VARCHAR" />
+    <result column="employee_code" property="employeeCode" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="is_hr_employee" property="isHrEmployee" jdbcType="CHAR" />
+    <result column="from_s_hr" property="fromSHr" jdbcType="CHAR" />
+    <result column="contact_address" property="contactAddress" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="nationality" property="nationality" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="origin_place" property="originPlace" jdbcType="VARCHAR" />
+    <result column="stature" property="stature" jdbcType="VARCHAR" />
+    <result column="blood_type" property="bloodType" jdbcType="VARCHAR" />
+    <result column="highest_education" property="highestEducation" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
+    <result column="marital_status" property="maritalStatus" jdbcType="VARCHAR" />
+    <result column="birth_date" property="birthDate" jdbcType="DATE" />
+    <result column="name_used" property="nameUsed" jdbcType="VARCHAR" />
+    <result column="work_date" property="workDate" jdbcType="DATE" />
+    <result column="data_state" property="dataState" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="prohibit_state" property="prohibitState" jdbcType="CHAR" />
+    <result column="prohibit_user" property="prohibitUser" jdbcType="INTEGER" />
+    <result column="prohibit_time" property="prohibitTime" jdbcType="TIMESTAMP" />
+    <result column="review_user" property="reviewUser" jdbcType="INTEGER" />
+    <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+    <result column="create_org_id" property="createOrgId" jdbcType="INTEGER" />
+    <result column="use_org_id" property="useOrgId" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, employee_name, employee_code, phone, mobile, email, is_hr_employee, from_s_hr, 
+    contact_address, image, nationality, nation, native_place, origin_place, stature, 
+    blood_type, highest_education, age, marital_status, birth_date, name_used, work_date, 
+    data_state, summary, prohibit_state, prohibit_user, prohibit_time, review_user, review_time, 
+    is_delete, create_time, create_user, update_time, update_user, create_org_id, use_org_id, 
+    sex
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vosung.auapi.client.entity.TAuEmployeeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AU_EMPLOYEE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AU_EMPLOYEE
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_AU_EMPLOYEE
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vosung.auapi.client.entity.TAuEmployeeExample" >
+    delete from T_AU_EMPLOYEE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vosung.auapi.client.entity.TAuEmployee" >
+    insert into T_AU_EMPLOYEE (id, employee_name, employee_code, 
+      phone, mobile, email, 
+      is_hr_employee, from_s_hr, contact_address, 
+      image, nationality, nation, 
+      native_place, origin_place, stature, 
+      blood_type, highest_education, age, 
+      marital_status, birth_date, name_used, 
+      work_date, data_state, summary, 
+      prohibit_state, prohibit_user, prohibit_time, 
+      review_user, review_time, is_delete, 
+      create_time, create_user, update_time, 
+      update_user, create_org_id, use_org_id, 
+      sex)
+    values (#{id,jdbcType=INTEGER}, #{employeeName,jdbcType=VARCHAR}, #{employeeCode,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{isHrEmployee,jdbcType=CHAR}, #{fromSHr,jdbcType=CHAR}, #{contactAddress,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{nativePlace,jdbcType=VARCHAR}, #{originPlace,jdbcType=VARCHAR}, #{stature,jdbcType=VARCHAR}, 
+      #{bloodType,jdbcType=VARCHAR}, #{highestEducation,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
+      #{maritalStatus,jdbcType=VARCHAR}, #{birthDate,jdbcType=DATE}, #{nameUsed,jdbcType=VARCHAR}, 
+      #{workDate,jdbcType=DATE}, #{dataState,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{prohibitState,jdbcType=CHAR}, #{prohibitUser,jdbcType=INTEGER}, #{prohibitTime,jdbcType=TIMESTAMP}, 
+      #{reviewUser,jdbcType=INTEGER}, #{reviewTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=INTEGER}, #{createOrgId,jdbcType=INTEGER}, #{useOrgId,jdbcType=INTEGER}, 
+      #{sex,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vosung.auapi.client.entity.TAuEmployee" useGeneratedKeys="true" keyProperty="id">
+    insert into T_AU_EMPLOYEE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeName != null" >
+        employee_name,
+      </if>
+      <if test="employeeCode != null" >
+        employee_code,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="isHrEmployee != null" >
+        is_hr_employee,
+      </if>
+      <if test="fromSHr != null" >
+        from_s_hr,
+      </if>
+      <if test="contactAddress != null" >
+        contact_address,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="nationality != null" >
+        nationality,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="originPlace != null" >
+        origin_place,
+      </if>
+      <if test="stature != null" >
+        stature,
+      </if>
+      <if test="bloodType != null" >
+        blood_type,
+      </if>
+      <if test="highestEducation != null" >
+        highest_education,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status,
+      </if>
+      <if test="birthDate != null" >
+        birth_date,
+      </if>
+      <if test="nameUsed != null" >
+        name_used,
+      </if>
+      <if test="workDate != null" >
+        work_date,
+      </if>
+      <if test="dataState != null" >
+        data_state,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state,
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user,
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time,
+      </if>
+      <if test="reviewUser != null" >
+        review_user,
+      </if>
+      <if test="reviewTime != null" >
+        review_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="createOrgId != null" >
+        create_org_id,
+      </if>
+      <if test="useOrgId != null" >
+        use_org_id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="employeeName != null" >
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isHrEmployee != null" >
+        #{isHrEmployee,jdbcType=CHAR},
+      </if>
+      <if test="fromSHr != null" >
+        #{fromSHr,jdbcType=CHAR},
+      </if>
+      <if test="contactAddress != null" >
+        #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="originPlace != null" >
+        #{originPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="stature != null" >
+        #{stature,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="highestEducation != null" >
+        #{highestEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null" >
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        #{birthDate,jdbcType=DATE},
+      </if>
+      <if test="nameUsed != null" >
+        #{nameUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null" >
+        #{workDate,jdbcType=DATE},
+      </if>
+      <if test="dataState != null" >
+        #{dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null" >
+        #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null" >
+        #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null" >
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="createOrgId != null" >
+        #{createOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="useOrgId != null" >
+        #{useOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vosung.auapi.client.entity.TAuEmployeeExample" resultType="java.lang.Integer" >
+    select count(*) from T_AU_EMPLOYEE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AU_EMPLOYEE
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeName != null" >
+        employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeCode != null" >
+        employee_code = #{record.employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=CHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isHrEmployee != null" >
+        is_hr_employee = #{record.isHrEmployee,jdbcType=CHAR},
+      </if>
+      <if test="record.fromSHr != null" >
+        from_s_hr = #{record.fromSHr,jdbcType=CHAR},
+      </if>
+      <if test="record.contactAddress != null" >
+        contact_address = #{record.contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nationality != null" >
+        nationality = #{record.nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativePlace != null" >
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originPlace != null" >
+        origin_place = #{record.originPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stature != null" >
+        stature = #{record.stature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodType != null" >
+        blood_type = #{record.bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.highestEducation != null" >
+        highest_education = #{record.highestEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maritalStatus != null" >
+        marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthDate != null" >
+        birth_date = #{record.birthDate,jdbcType=DATE},
+      </if>
+      <if test="record.nameUsed != null" >
+        name_used = #{record.nameUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workDate != null" >
+        work_date = #{record.workDate,jdbcType=DATE},
+      </if>
+      <if test="record.dataState != null" >
+        data_state = #{record.dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prohibitState != null" >
+        prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="record.prohibitUser != null" >
+        prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.prohibitTime != null" >
+        prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reviewUser != null" >
+        review_user = #{record.reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.reviewTime != null" >
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.createOrgId != null" >
+        create_org_id = #{record.createOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.useOrgId != null" >
+        use_org_id = #{record.useOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AU_EMPLOYEE
+    set id = #{record.id,jdbcType=INTEGER},
+      employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      employee_code = #{record.employeeCode,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=CHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      is_hr_employee = #{record.isHrEmployee,jdbcType=CHAR},
+      from_s_hr = #{record.fromSHr,jdbcType=CHAR},
+      contact_address = #{record.contactAddress,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      nationality = #{record.nationality,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      origin_place = #{record.originPlace,jdbcType=VARCHAR},
+      stature = #{record.stature,jdbcType=VARCHAR},
+      blood_type = #{record.bloodType,jdbcType=VARCHAR},
+      highest_education = #{record.highestEducation,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+      birth_date = #{record.birthDate,jdbcType=DATE},
+      name_used = #{record.nameUsed,jdbcType=VARCHAR},
+      work_date = #{record.workDate,jdbcType=DATE},
+      data_state = #{record.dataState,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      review_user = #{record.reviewUser,jdbcType=INTEGER},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      is_delete = #{record.isDelete,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      create_org_id = #{record.createOrgId,jdbcType=INTEGER},
+      use_org_id = #{record.useOrgId,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vosung.auapi.client.entity.TAuEmployee" >
+    update T_AU_EMPLOYEE
+    <set >
+      <if test="employeeName != null" >
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        employee_code = #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isHrEmployee != null" >
+        is_hr_employee = #{isHrEmployee,jdbcType=CHAR},
+      </if>
+      <if test="fromSHr != null" >
+        from_s_hr = #{fromSHr,jdbcType=CHAR},
+      </if>
+      <if test="contactAddress != null" >
+        contact_address = #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="originPlace != null" >
+        origin_place = #{originPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="stature != null" >
+        stature = #{stature,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        blood_type = #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="highestEducation != null" >
+        highest_education = #{highestEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        birth_date = #{birthDate,jdbcType=DATE},
+      </if>
+      <if test="nameUsed != null" >
+        name_used = #{nameUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null" >
+        work_date = #{workDate,jdbcType=DATE},
+      </if>
+      <if test="dataState != null" >
+        data_state = #{dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state = #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null" >
+        review_user = #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null" >
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="createOrgId != null" >
+        create_org_id = #{createOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="useOrgId != null" >
+        use_org_id = #{useOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vosung.auapi.client.entity.TAuEmployee" >
+    update T_AU_EMPLOYEE
+    set employee_name = #{employeeName,jdbcType=VARCHAR},
+      employee_code = #{employeeCode,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      is_hr_employee = #{isHrEmployee,jdbcType=CHAR},
+      from_s_hr = #{fromSHr,jdbcType=CHAR},
+      contact_address = #{contactAddress,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      origin_place = #{originPlace,jdbcType=VARCHAR},
+      stature = #{stature,jdbcType=VARCHAR},
+      blood_type = #{bloodType,jdbcType=VARCHAR},
+      highest_education = #{highestEducation,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=DATE},
+      name_used = #{nameUsed,jdbcType=VARCHAR},
+      work_date = #{workDate,jdbcType=DATE},
+      data_state = #{dataState,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      prohibit_state = #{prohibitState,jdbcType=CHAR},
+      prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      review_user = #{reviewUser,jdbcType=INTEGER},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      create_org_id = #{createOrgId,jdbcType=INTEGER},
+      use_org_id = #{useOrgId,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="getEmployeeList"  resultType="com.vosung.auapi.client.dto.responsedto.employee.EmployeeResponseDto" parameterType="com.vosung.auapi.client.dto.requestdto.employee.EmployeeListRequest">
+    select e.id,e.employee_name employeeName,e.employee_code employeeCode,e.phone,e.mobile,e.email,e.contact_address contactAddress,e.data_state dataState,
+    e.prohibit_state prohibitState,o.org_name userOrgName,o.org_name createOrgName,e.sex
+    from T_AU_EMPLOYEE e
+    left join T_AU_ORGANIZATION o on e.use_org_id = o.id
+    where e.is_delete = 'N';
+  </select>
+
+  <select id="getEmployeeMainPost"  resultType="com.vosung.auapi.client.dto.responsedto.employee.EmployeeResponseDto" parameterType="java.lang.Integer">
+    select p.position_name mainPositionName,ep.director_position_start_date directorPositionStartDate
+    from T_AU_EMPLOYEE_POSITION ep
+    left join T_AU_EMPLOYEE e on ep.employee_id = e.id
+    left join T_AU_POSITION p on p.id = ep.director_position_id
+    where ep.is_delete = 'N' AND ep.is_main_position = 'Y' and e.id = #{employeeId};
+  </select>
+
+
+  <select id="getUNPostEmployeeList"  resultType="com.vosung.auapi.client.dto.responsedto.employee.EmployeeResponseDto" parameterType="java.util.List">
+    select e.id,e.employee_name employeeName,e.employee_code employeeCode,e.phone,e.mobile,e.email,e.contact_address contactAddress,e.data_state dataState,
+    e.prohibit_state prohibitState,o.org_name userOrgName,o.org_name createOrgName,e.sex
+    from T_AU_EMPLOYEE e
+    left join T_AU_ORGANIZATION o on e.use_org_id = o.id
+    where e.is_delete = 'N'
+          and e.id NOT IN
+            <foreach item="employeeId" index="index" collection="list" open="(" separator="," close=")">
+                #{employeeId}
+            </foreach>
+  </select>
+</mapper>

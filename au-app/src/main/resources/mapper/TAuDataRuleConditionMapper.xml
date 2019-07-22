@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vosung.authapp.role.mapper.TAuDataRuleConditionMapper" >
+  <resultMap id="BaseResultMap" type="com.vosung.auapi.client.entity.TAuDataRuleCondition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="data_rule_id" property="dataRuleId" jdbcType="INTEGER" />
+    <result column="table_name" property="tableName" jdbcType="VARCHAR" />
+    <result column="contact_table_id" property="contactTableId" jdbcType="INTEGER" />
+    <result column="contact_column" property="contactColumn" jdbcType="VARCHAR" />
+    <result column="left_brackets" property="leftBrackets" jdbcType="VARCHAR" />
+    <result column="right_brackets" property="rightBrackets" jdbcType="VARCHAR" />
+    <result column="column_name" property="columnName" jdbcType="VARCHAR" />
+    <result column="compare" property="compare" jdbcType="VARCHAR" />
+    <result column="condition_value" property="conditionValue" jdbcType="VARCHAR" />
+    <result column="logic" property="logic" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="prohibit_state" property="prohibitState" jdbcType="CHAR" />
+    <result column="prohibit_user" property="prohibitUser" jdbcType="INTEGER" />
+    <result column="prohibit_time" property="prohibitTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+    <result column="column_code" property="columnCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, data_rule_id, table_name, contact_table_id, contact_column, left_brackets, right_brackets, 
+    column_name, compare, condition_value, logic, sort, remark, prohibit_state, prohibit_user, 
+    prohibit_time, is_delete, create_time, create_user, update_time, update_user, column_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vosung.auapi.client.entity.TAuDataRuleConditionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AU_DATA_RULE_CONDITION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AU_DATA_RULE_CONDITION
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_AU_DATA_RULE_CONDITION
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vosung.auapi.client.entity.TAuDataRuleConditionExample" >
+    delete from T_AU_DATA_RULE_CONDITION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vosung.auapi.client.entity.TAuDataRuleCondition" >
+    insert into T_AU_DATA_RULE_CONDITION (id, data_rule_id, table_name, 
+      contact_table_id, contact_column, left_brackets, 
+      right_brackets, column_name, compare, 
+      condition_value, logic, sort, 
+      remark, prohibit_state, prohibit_user, 
+      prohibit_time, is_delete, create_time, 
+      create_user, update_time, update_user, 
+      column_code)
+    values (#{id,jdbcType=INTEGER}, #{dataRuleId,jdbcType=INTEGER}, #{tableName,jdbcType=VARCHAR}, 
+      #{contactTableId,jdbcType=INTEGER}, #{contactColumn,jdbcType=VARCHAR}, #{leftBrackets,jdbcType=VARCHAR}, 
+      #{rightBrackets,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, #{compare,jdbcType=VARCHAR}, 
+      #{conditionValue,jdbcType=VARCHAR}, #{logic,jdbcType=VARCHAR}, #{sort,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{prohibitState,jdbcType=CHAR}, #{prohibitUser,jdbcType=INTEGER}, 
+      #{prohibitTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, 
+      #{columnCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vosung.auapi.client.entity.TAuDataRuleCondition" >
+    insert into T_AU_DATA_RULE_CONDITION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dataRuleId != null" >
+        data_rule_id,
+      </if>
+      <if test="tableName != null" >
+        table_name,
+      </if>
+      <if test="contactTableId != null" >
+        contact_table_id,
+      </if>
+      <if test="contactColumn != null" >
+        contact_column,
+      </if>
+      <if test="leftBrackets != null" >
+        left_brackets,
+      </if>
+      <if test="rightBrackets != null" >
+        right_brackets,
+      </if>
+      <if test="columnName != null" >
+        column_name,
+      </if>
+      <if test="compare != null" >
+        compare,
+      </if>
+      <if test="conditionValue != null" >
+        condition_value,
+      </if>
+      <if test="logic != null" >
+        logic,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state,
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user,
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="columnCode != null" >
+        column_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dataRuleId != null" >
+        #{dataRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactTableId != null" >
+        #{contactTableId,jdbcType=INTEGER},
+      </if>
+      <if test="contactColumn != null" >
+        #{contactColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="leftBrackets != null" >
+        #{leftBrackets,jdbcType=VARCHAR},
+      </if>
+      <if test="rightBrackets != null" >
+        #{rightBrackets,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null" >
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="compare != null" >
+        #{compare,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionValue != null" >
+        #{conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="logic != null" >
+        #{logic,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null" >
+        #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="columnCode != null" >
+        #{columnCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vosung.auapi.client.entity.TAuDataRuleConditionExample" resultType="java.lang.Integer" >
+    select count(*) from T_AU_DATA_RULE_CONDITION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AU_DATA_RULE_CONDITION
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataRuleId != null" >
+        data_rule_id = #{record.dataRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tableName != null" >
+        table_name = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactTableId != null" >
+        contact_table_id = #{record.contactTableId,jdbcType=INTEGER},
+      </if>
+      <if test="record.contactColumn != null" >
+        contact_column = #{record.contactColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leftBrackets != null" >
+        left_brackets = #{record.leftBrackets,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightBrackets != null" >
+        right_brackets = #{record.rightBrackets,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnName != null" >
+        column_name = #{record.columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compare != null" >
+        compare = #{record.compare,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conditionValue != null" >
+        condition_value = #{record.conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logic != null" >
+        logic = #{record.logic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prohibitState != null" >
+        prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="record.prohibitUser != null" >
+        prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.prohibitTime != null" >
+        prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnCode != null" >
+        column_code = #{record.columnCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AU_DATA_RULE_CONDITION
+    set id = #{record.id,jdbcType=INTEGER},
+      data_rule_id = #{record.dataRuleId,jdbcType=INTEGER},
+      table_name = #{record.tableName,jdbcType=VARCHAR},
+      contact_table_id = #{record.contactTableId,jdbcType=INTEGER},
+      contact_column = #{record.contactColumn,jdbcType=VARCHAR},
+      left_brackets = #{record.leftBrackets,jdbcType=VARCHAR},
+      right_brackets = #{record.rightBrackets,jdbcType=VARCHAR},
+      column_name = #{record.columnName,jdbcType=VARCHAR},
+      compare = #{record.compare,jdbcType=VARCHAR},
+      condition_value = #{record.conditionValue,jdbcType=VARCHAR},
+      logic = #{record.logic,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      is_delete = #{record.isDelete,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      column_code = #{record.columnCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vosung.auapi.client.entity.TAuDataRuleCondition" >
+    update T_AU_DATA_RULE_CONDITION
+    <set >
+      <if test="dataRuleId != null" >
+        data_rule_id = #{dataRuleId,jdbcType=INTEGER},
+      </if>
+      <if test="tableName != null" >
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactTableId != null" >
+        contact_table_id = #{contactTableId,jdbcType=INTEGER},
+      </if>
+      <if test="contactColumn != null" >
+        contact_column = #{contactColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="leftBrackets != null" >
+        left_brackets = #{leftBrackets,jdbcType=VARCHAR},
+      </if>
+      <if test="rightBrackets != null" >
+        right_brackets = #{rightBrackets,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null" >
+        column_name = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="compare != null" >
+        compare = #{compare,jdbcType=VARCHAR},
+      </if>
+      <if test="conditionValue != null" >
+        condition_value = #{conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="logic != null" >
+        logic = #{logic,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state = #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="columnCode != null" >
+        column_code = #{columnCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vosung.auapi.client.entity.TAuDataRuleCondition" >
+    update T_AU_DATA_RULE_CONDITION
+    set data_rule_id = #{dataRuleId,jdbcType=INTEGER},
+      table_name = #{tableName,jdbcType=VARCHAR},
+      contact_table_id = #{contactTableId,jdbcType=INTEGER},
+      contact_column = #{contactColumn,jdbcType=VARCHAR},
+      left_brackets = #{leftBrackets,jdbcType=VARCHAR},
+      right_brackets = #{rightBrackets,jdbcType=VARCHAR},
+      column_name = #{columnName,jdbcType=VARCHAR},
+      compare = #{compare,jdbcType=VARCHAR},
+      condition_value = #{conditionValue,jdbcType=VARCHAR},
+      logic = #{logic,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      prohibit_state = #{prohibitState,jdbcType=CHAR},
+      prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      column_code = #{columnCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

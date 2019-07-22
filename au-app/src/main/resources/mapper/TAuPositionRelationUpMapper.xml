@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vosung.authapp.position.mapper.TAuPositionRelationUpMapper" >
+  <resultMap id="BaseResultMap" type="com.vosung.auapi.client.entity.TAuPositionRelationUp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="position_id" property="positionId" jdbcType="INTEGER" />
+    <result column="superior_position_id" property="superiorPositionId" jdbcType="INTEGER" />
+    <result column="report_type" property="reportType" jdbcType="VARCHAR" />
+    <result column="effect_date" property="effectDate" jdbcType="DATE" />
+    <result column="abate_date" property="abateDate" jdbcType="DATE" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="prohibit_state" property="prohibitState" jdbcType="CHAR" />
+    <result column="prohibit_user" property="prohibitUser" jdbcType="INTEGER" />
+    <result column="prohibit_time" property="prohibitTime" jdbcType="TIMESTAMP" />
+    <result column="review_user" property="reviewUser" jdbcType="INTEGER" />
+    <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+    <result column="is_effect" property="isEffect" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, position_id, superior_position_id, report_type, effect_date, abate_date, summary, 
+    prohibit_state, prohibit_user, prohibit_time, review_user, review_time, is_delete, 
+    create_time, create_user, update_time, update_user, is_effect
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vosung.auapi.client.entity.TAuPositionRelationUpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AU_POSITION_RELATION_UP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AU_POSITION_RELATION_UP
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_AU_POSITION_RELATION_UP
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vosung.auapi.client.entity.TAuPositionRelationUpExample" >
+    delete from T_AU_POSITION_RELATION_UP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vosung.auapi.client.entity.TAuPositionRelationUp" >
+    insert into T_AU_POSITION_RELATION_UP (id, position_id, superior_position_id, 
+      report_type, effect_date, abate_date, 
+      summary, prohibit_state, prohibit_user, 
+      prohibit_time, review_user, review_time, 
+      is_delete, create_time, create_user, 
+      update_time, update_user, is_effect
+      )
+    values (#{id,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, #{superiorPositionId,jdbcType=INTEGER}, 
+      #{reportType,jdbcType=VARCHAR}, #{effectDate,jdbcType=DATE}, #{abateDate,jdbcType=DATE}, 
+      #{summary,jdbcType=VARCHAR}, #{prohibitState,jdbcType=CHAR}, #{prohibitUser,jdbcType=INTEGER}, 
+      #{prohibitTime,jdbcType=TIMESTAMP}, #{reviewUser,jdbcType=INTEGER}, #{reviewTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{isEffect,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vosung.auapi.client.entity.TAuPositionRelationUp" >
+    insert into T_AU_POSITION_RELATION_UP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="superiorPositionId != null" >
+        superior_position_id,
+      </if>
+      <if test="reportType != null" >
+        report_type,
+      </if>
+      <if test="effectDate != null" >
+        effect_date,
+      </if>
+      <if test="abateDate != null" >
+        abate_date,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state,
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user,
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time,
+      </if>
+      <if test="reviewUser != null" >
+        review_user,
+      </if>
+      <if test="reviewTime != null" >
+        review_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="isEffect != null" >
+        is_effect,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="positionId != null" >
+        #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="superiorPositionId != null" >
+        #{superiorPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="reportType != null" >
+        #{reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        #{effectDate,jdbcType=DATE},
+      </if>
+      <if test="abateDate != null" >
+        #{abateDate,jdbcType=DATE},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null" >
+        #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null" >
+        #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null" >
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="isEffect != null" >
+        #{isEffect,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vosung.auapi.client.entity.TAuPositionRelationUpExample" resultType="java.lang.Integer" >
+    select count(*) from T_AU_POSITION_RELATION_UP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AU_POSITION_RELATION_UP
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionId != null" >
+        position_id = #{record.positionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.superiorPositionId != null" >
+        superior_position_id = #{record.superiorPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportType != null" >
+        report_type = #{record.reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectDate != null" >
+        effect_date = #{record.effectDate,jdbcType=DATE},
+      </if>
+      <if test="record.abateDate != null" >
+        abate_date = #{record.abateDate,jdbcType=DATE},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prohibitState != null" >
+        prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="record.prohibitUser != null" >
+        prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.prohibitTime != null" >
+        prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reviewUser != null" >
+        review_user = #{record.reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.reviewTime != null" >
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.isEffect != null" >
+        is_effect = #{record.isEffect,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AU_POSITION_RELATION_UP
+    set id = #{record.id,jdbcType=INTEGER},
+      position_id = #{record.positionId,jdbcType=INTEGER},
+      superior_position_id = #{record.superiorPositionId,jdbcType=INTEGER},
+      report_type = #{record.reportType,jdbcType=VARCHAR},
+      effect_date = #{record.effectDate,jdbcType=DATE},
+      abate_date = #{record.abateDate,jdbcType=DATE},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      review_user = #{record.reviewUser,jdbcType=INTEGER},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      is_delete = #{record.isDelete,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      is_effect = #{record.isEffect,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vosung.auapi.client.entity.TAuPositionRelationUp" >
+    update T_AU_POSITION_RELATION_UP
+    <set >
+      <if test="positionId != null" >
+        position_id = #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="superiorPositionId != null" >
+        superior_position_id = #{superiorPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="reportType != null" >
+        report_type = #{reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        effect_date = #{effectDate,jdbcType=DATE},
+      </if>
+      <if test="abateDate != null" >
+        abate_date = #{abateDate,jdbcType=DATE},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state = #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null" >
+        review_user = #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null" >
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="isEffect != null" >
+        is_effect = #{isEffect,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vosung.auapi.client.entity.TAuPositionRelationUp" >
+    update T_AU_POSITION_RELATION_UP
+    set position_id = #{positionId,jdbcType=INTEGER},
+      superior_position_id = #{superiorPositionId,jdbcType=INTEGER},
+      report_type = #{reportType,jdbcType=VARCHAR},
+      effect_date = #{effectDate,jdbcType=DATE},
+      abate_date = #{abateDate,jdbcType=DATE},
+      summary = #{summary,jdbcType=VARCHAR},
+      prohibit_state = #{prohibitState,jdbcType=CHAR},
+      prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      review_user = #{reviewUser,jdbcType=INTEGER},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      is_effect = #{isEffect,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectBySuperiorPositionId" resultType="java.lang.Integer">
+    SELECT po.* FROM T_AU_POSITION po LEFT JOIN T_AU_POSITION_RELATION_UP pdo on po.id = pdo.superior_position_id WHERE pdo
+.position_id = #{superiorPositionId,jdbcType=INTEGER}
+  </select>
+  <update id="updateSuperIdByPositionId">
+     update T_AU_POSITION_RELATION_UP set superior_position_id = #{superId,jdbcType=INTEGER} where position_id = #{positionId,jdbcType=INTEGER}
+  </update>
+</mapper>

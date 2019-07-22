@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vosung.authapp.user.mapper.TAuUserMapper" >
+  <resultMap id="BaseResultMap" type="com.vosung.auapi.client.entity.TAuUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="create_org_id" property="createOrgId" jdbcType="INTEGER" />
+    <result column="permit_org_id" property="permitOrgId" jdbcType="INTEGER" />
+    <result column="belong_dept_id" property="belongDeptId" jdbcType="INTEGER" />
+    <result column="belong_station_id" property="belongStationId" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="contact_staff" property="contactStaff" jdbcType="INTEGER" />
+    <result column="contact_staff_type" property="contactStaffType" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="lift_ban_by" property="liftBanBy" jdbcType="INTEGER" />
+    <result column="lift_ban_time" property="liftBanTime" jdbcType="TIMESTAMP" />
+    <result column="data_state" property="dataState" jdbcType="VARCHAR" />
+    <result column="prohibit_state" property="prohibitState" jdbcType="CHAR" />
+    <result column="review_user" property="reviewUser" jdbcType="INTEGER" />
+    <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP" />
+    <result column="prohibit_user" property="prohibitUser" jdbcType="INTEGER" />
+    <result column="prohibit_time" property="prohibitTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, password, user_type, name, create_org_id, permit_org_id, belong_dept_id, 
+    belong_station_id, email, sex, phone, contact_staff, contact_staff_type, summary, 
+    image, lift_ban_by, lift_ban_time, data_state, prohibit_state, review_user, review_time, 
+    prohibit_user, prohibit_time, is_delete, create_time, create_user, update_time, update_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vosung.auapi.client.entity.TAuUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AU_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AU_USER
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_AU_USER
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vosung.auapi.client.entity.TAuUserExample" >
+    delete from T_AU_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vosung.auapi.client.entity.TAuUser" >
+    insert into T_AU_USER (id, username, password, 
+      user_type, name, create_org_id, 
+      permit_org_id, belong_dept_id, belong_station_id, 
+      email, sex, phone, contact_staff, 
+      contact_staff_type, summary, image, 
+      lift_ban_by, lift_ban_time, data_state, 
+      prohibit_state, review_user, review_time, 
+      prohibit_user, prohibit_time, is_delete, 
+      create_time, create_user, update_time, 
+      update_user)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{createOrgId,jdbcType=INTEGER}, 
+      #{permitOrgId,jdbcType=INTEGER}, #{belongDeptId,jdbcType=INTEGER}, #{belongStationId,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{contactStaff,jdbcType=INTEGER}, 
+      #{contactStaffType,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{liftBanBy,jdbcType=INTEGER}, #{liftBanTime,jdbcType=TIMESTAMP}, #{dataState,jdbcType=VARCHAR}, 
+      #{prohibitState,jdbcType=CHAR}, #{reviewUser,jdbcType=INTEGER}, #{reviewTime,jdbcType=TIMESTAMP}, 
+      #{prohibitUser,jdbcType=INTEGER}, #{prohibitTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vosung.auapi.client.entity.TAuUser" useGeneratedKeys="true" keyProperty="id">
+    insert into T_AU_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="createOrgId != null" >
+        create_org_id,
+      </if>
+      <if test="permitOrgId != null" >
+        permit_org_id,
+      </if>
+      <if test="belongDeptId != null" >
+        belong_dept_id,
+      </if>
+      <if test="belongStationId != null" >
+        belong_station_id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="contactStaff != null" >
+        contact_staff,
+      </if>
+      <if test="contactStaffType != null" >
+        contact_staff_type,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="liftBanBy != null" >
+        lift_ban_by,
+      </if>
+      <if test="liftBanTime != null" >
+        lift_ban_time,
+      </if>
+      <if test="dataState != null" >
+        data_state,
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state,
+      </if>
+      <if test="reviewUser != null" >
+        review_user,
+      </if>
+      <if test="reviewTime != null" >
+        review_time,
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user,
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createOrgId != null" >
+        #{createOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="permitOrgId != null" >
+        #{permitOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="belongDeptId != null" >
+        #{belongDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="belongStationId != null" >
+        #{belongStationId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactStaff != null" >
+        #{contactStaff,jdbcType=INTEGER},
+      </if>
+      <if test="contactStaffType != null" >
+        #{contactStaffType,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="liftBanBy != null" >
+        #{liftBanBy,jdbcType=INTEGER},
+      </if>
+      <if test="liftBanTime != null" >
+        #{liftBanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataState != null" >
+        #{dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="reviewUser != null" >
+        #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null" >
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prohibitUser != null" >
+        #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vosung.auapi.client.entity.TAuUserExample" resultType="java.lang.Integer" >
+    select count(*) from T_AU_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AU_USER
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null" >
+        user_type = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createOrgId != null" >
+        create_org_id = #{record.createOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.permitOrgId != null" >
+        permit_org_id = #{record.permitOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.belongDeptId != null" >
+        belong_dept_id = #{record.belongDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.belongStationId != null" >
+        belong_station_id = #{record.belongStationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactStaff != null" >
+        contact_staff = #{record.contactStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.contactStaffType != null" >
+        contact_staff_type = #{record.contactStaffType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liftBanBy != null" >
+        lift_ban_by = #{record.liftBanBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.liftBanTime != null" >
+        lift_ban_time = #{record.liftBanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dataState != null" >
+        data_state = #{record.dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prohibitState != null" >
+        prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="record.reviewUser != null" >
+        review_user = #{record.reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.reviewTime != null" >
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prohibitUser != null" >
+        prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.prohibitTime != null" >
+        prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AU_USER
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      create_org_id = #{record.createOrgId,jdbcType=INTEGER},
+      permit_org_id = #{record.permitOrgId,jdbcType=INTEGER},
+      belong_dept_id = #{record.belongDeptId,jdbcType=INTEGER},
+      belong_station_id = #{record.belongStationId,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=CHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      contact_staff = #{record.contactStaff,jdbcType=INTEGER},
+      contact_staff_type = #{record.contactStaffType,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      lift_ban_by = #{record.liftBanBy,jdbcType=INTEGER},
+      lift_ban_time = #{record.liftBanTime,jdbcType=TIMESTAMP},
+      data_state = #{record.dataState,jdbcType=VARCHAR},
+      prohibit_state = #{record.prohibitState,jdbcType=CHAR},
+      review_user = #{record.reviewUser,jdbcType=INTEGER},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      prohibit_user = #{record.prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{record.prohibitTime,jdbcType=TIMESTAMP},
+      is_delete = #{record.isDelete,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vosung.auapi.client.entity.TAuUser" >
+    update T_AU_USER
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createOrgId != null" >
+        create_org_id = #{createOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="permitOrgId != null" >
+        permit_org_id = #{permitOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="belongDeptId != null" >
+        belong_dept_id = #{belongDeptId,jdbcType=INTEGER},
+      </if>
+      <if test="belongStationId != null" >
+        belong_station_id = #{belongStationId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactStaff != null" >
+        contact_staff = #{contactStaff,jdbcType=INTEGER},
+      </if>
+      <if test="contactStaffType != null" >
+        contact_staff_type = #{contactStaffType,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="liftBanBy != null" >
+        lift_ban_by = #{liftBanBy,jdbcType=INTEGER},
+      </if>
+      <if test="liftBanTime != null" >
+        lift_ban_time = #{liftBanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataState != null" >
+        data_state = #{dataState,jdbcType=VARCHAR},
+      </if>
+      <if test="prohibitState != null" >
+        prohibit_state = #{prohibitState,jdbcType=CHAR},
+      </if>
+      <if test="reviewUser != null" >
+        review_user = #{reviewUser,jdbcType=INTEGER},
+      </if>
+      <if test="reviewTime != null" >
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prohibitUser != null" >
+        prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      </if>
+      <if test="prohibitTime != null" >
+        prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vosung.auapi.client.entity.TAuUser" >
+    update T_AU_USER
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      create_org_id = #{createOrgId,jdbcType=INTEGER},
+      permit_org_id = #{permitOrgId,jdbcType=INTEGER},
+      belong_dept_id = #{belongDeptId,jdbcType=INTEGER},
+      belong_station_id = #{belongStationId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      contact_staff = #{contactStaff,jdbcType=INTEGER},
+      contact_staff_type = #{contactStaffType,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      lift_ban_by = #{liftBanBy,jdbcType=INTEGER},
+      lift_ban_time = #{liftBanTime,jdbcType=TIMESTAMP},
+      data_state = #{dataState,jdbcType=VARCHAR},
+      prohibit_state = #{prohibitState,jdbcType=CHAR},
+      review_user = #{reviewUser,jdbcType=INTEGER},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      prohibit_user = #{prohibitUser,jdbcType=INTEGER},
+      prohibit_time = #{prohibitTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
